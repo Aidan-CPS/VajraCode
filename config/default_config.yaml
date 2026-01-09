@@ -1,0 +1,31 @@
+# Example configuration for VajraCode experiments
+
+# Data settings
+data:
+  data_dir: "data/processed"
+  subject_col: "subject_id"
+  time_col: "timepoint"
+  
+# Model settings
+model:
+  type: "linear"  # Options: linear, logistic
+  standardize: true
+  random_seed: 42
+
+# Training settings
+training:
+  temporal_split: true
+  train_ratio: 0.7  # Proportion of timepoints for training
+  
+# Evaluation settings
+evaluation:
+  metrics:
+    regression: ["mse", "rmse", "mae", "r2"]
+    classification: ["accuracy", "precision", "recall", "f1", "auc"]
+  
+# Output settings
+output:
+  save_dir: "outputs"
+  save_plots: true
+  save_predictions: true
+  save_model_params: true

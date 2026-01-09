@@ -1,4 +1,4 @@
-# test.py
+# test_LogisticRegression.py
 
 import pandas as pd
 

@@ -3,6 +3,115 @@ VajraCode is a research codebase for modeling depression as a dynamic process us
 
 
 
+## Getting Started
+
+This section explains how to set up the VajraCode project locally and run the first baseline analysis. It is written for new collaborators and assumes no prior familiarity with the codebase.
+
+⸻
+
+1. Clone the repository
+
+Clone the VajraCode repository to your local machine:
+
+git clone https://github.com/your-username/VajraCode.git
+cd VajraCode
+
+(Replace the URL with the actual repository URL.)
+
+⸻
+
+2. Set up a Python environment
+
+We recommend using a virtual environment.
+
+Create and activate a virtual environment:
+
+python -m venv .venv
+source .venv/bin/activate
+
+(On Windows, use .venv\\Scripts\\activate.)
+
+Install dependencies:
+
+pip install -r requirements.txt
+
+⸻
+
+3. Download and place the data
+
+The WARN-D data should live next to the VajraCode repository, not inside it.
+
+Your directory structure should look like this:
+
+WARN-D/
+├── VajraCode/
+└── WARND_data/
+└── data/
+├── stage1_train_x.csv
+├── stage1_test_x.csv
+├── stage2_train_x.csv
+├── stage2_test_x.csv
+├── stage3_train_x.csv
+├── stage3_test_x.csv
+└── stage3_train_y.csv
+
+Do not commit any data files to GitHub.
+
+For a detailed explanation of the dataset, see README_data.md.
+
+⸻
+
+4. Verify data access
+
+Before running any models, verify that the data can be loaded correctly.
+
+The first script you should run is a data inspection script (for example):
+
+python scripts/load_data.py
+
+This script should:
+	•	load each stage of the data,
+	•	print basic information (row counts, column names),
+	•	confirm that participant IDs and time indices are present.
+
+⸻
+
+5. Run the first baseline model (MML v1)
+
+The first modeling goal is to run a simple, theory-agnostic baseline.
+
+This baseline:
+	•	aggregates Stage 2 data (EMA + wearables) up to each Stage 3 time point,
+	•	combines these aggregates with Stage 1 baseline features,
+	•	uses a simple linear or logistic regression model,
+	•	evaluates performance using AUC-ROC.
+
+You can run the baseline model using:
+
+python scripts/run_mml_baseline.py
+
+This establishes a reference point against which all theory-guided models (WML, YML) will be compared.
+
+⸻
+
+6. What to do next
+
+After the MML baseline is running successfully:
+	1.	Inspect predictions and evaluation metrics.
+	2.	Review data aggregation logic.
+	3.	Begin implementing theory-guided constructs (starting with bodily tamas).
+
+See the main README for the project roadmap and modeling philosophy.
+
+
+
+
+
+
+
+
+
+
 ## Data Overview
 
 This project uses the WARN-D dataset, a longitudinal, multi-modal dataset designed to support early prediction of depression while minimizing data leakage. The data are already de-identified and split into training (70%) and test (30%) sets.
